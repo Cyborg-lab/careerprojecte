@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoHub | Avtomobillar dunyosi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #ffffff;
+            color: #111827;
+            transition: all 0.3s ease;
+        }
+
+        /* DARK MODE */
+        body.dark {
+            background: #0f172a;
+            color: #f3f4f6;
+        }
+
+        body.dark .header {
+            background: #033A39;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        body.dark .card,
+        body.dark .cat,
+        body.dark .search {
+            background: #1e293b;
+            color: #f3f4f6;
+        }
+
+        body.dark .footer {
+            background: #0f172a;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        body.dark .why-section {
+            background: #0f172a;
+        }
+
+        body.dark .testimonial-section {
+            background: #0f172a;
+        }
+
+        /* HEADER */
+        .header {
+            background: #033A39;
+            padding: 16px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .logo i {
+            font-size: 28px;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 12px;
+            transition: all 0.3s;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .nav a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        #themeBtn {
+            margin-left: 8px;
+            padding: 8px 14px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+
+        #themeBtn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* HERO - faqat rasm, gradient yo'q */
+        .hero {
+            height: 600px;
+            background: url("https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=1950&q=80") center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero h1, .hero p, .hero-buttons {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            margin-bottom: 20px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #033A39;
+            padding: 14px 32px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .btn-outline {
+            border: 2px solid white;
+            color: white;
+            padding: 14px 32px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: #033A39;
+            transform: translateY(-3px);
+        }
+
+        /* SEARCH */
+        .search {
+            background: white;
+            width: 80%;
+            max-width: 800px;
+            margin: -40px auto 40px;
+            padding: 20px;
+            border-radius: 60px;
+            display: flex;
+            gap: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 10;
+        }
+
+        .search input {
+            flex: 1;
+            padding: 16px 24px;
+            border: 2px solid #e5e7eb;
+            border-radius: 50px;
+            outline: none;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .search input:focus {
+            border-color: #033A39;
+            box-shadow: 0 0 0 3px rgba(3, 58, 57, 0.1);
+        }
+
+        .search button {
+            background: #033A39;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 50px;
+            cursor: pointer;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .search button:hover {
+            background: #044c4b;
+            transform: scale(1.02);
+        }
+
+        /* CATEGORY */
+        .categories {
+            padding: 60px 5%;
+        }
+
+        .categories h2 {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            letter-spacing: -0.5px;
+        }
+
+        .cat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .cat {
+            background: white;
+            padding: 24px 20px;
+            text-align: center;
+            border-radius: 24px;
+            font-weight: 600;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid #f0f0f0;
+        }
+
+        .cat i {
+            font-size: 32px;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .cat:hover {
+            background: #033A39;
+            transform: translateY(-8px);
+            color: white;
+            border-color: #033A39;
+        }
+
+        /* CARDS */
+        .section {
+            padding: 60px 5%;
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #6b7280;
+            margin-bottom: 48px;
+            font-size: 16px;
+        }
+
+        .grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.4s;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f0f0f0;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: 0.4s;
+        }
+
+        .card:hover img {
+            transform: scale(1.05);
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-body h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .card-body p {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .price {
+            color: #033A39;
+            font-weight: 800;
+            font-size: 20px;
+            margin: 12px 0;
+        }
+
+        .card a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background: #033A39;
+            color: white;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .card a:hover {
+            background: #044c4b;
+            gap: 12px;
+        }
+
+        /* WHY CHOOSE US */
+        .why-section {
+            background: #f9fafb;
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 40px 30px;
+            background: white;
+            border-radius: 24px;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(3, 58, 57, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .feature-icon i {
+            font-size: 36px;
+            color: #033A39;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* TESTIMONIALS */
+        .testimonial-section {
+            background: #f9fafb;
+        }
+
+        .testimonial-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 24px;
+            text-align: center;
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: #4b5563;
+            line-height: 1.6;
+        }
+
+        .testimonial-card h4 {
+            color: #033A39;
+            font-weight: 700;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: #033A39;
+            color: white;
+            margin-top: 60px;
+            padding: 60px 5% 30px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+        }
+
+        .footer h3, .footer h4 {
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .footer p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .footer a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            display: block;
+            margin: 10px 0;
+            transition: all 0.3s;
+        }
+
+        .footer a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 20px;
+            }
+            
+            .nav {
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+                padding: 0 20px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+                padding: 0 20px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                gap: 12px;
+                width: 80%;
+            }
+            
+            .search {
+                width: 90%;
+                flex-direction: column;
+                border-radius: 30px;
+            }
+            
+            .search button {
+                justify-content: center;
+            }
+            
+            .categories h2,
+            .section h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER -->
+    <div class="header">
+        <div class="logo">
+            <i class="fas fa-car"></i>
+            <span>AutoHub</span>
+        </div>
+        <div class="nav">
+            <a href="/"><i class="fas fa-home"></i> Bosh sahifa</a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'user:create_listing' %}"><i class="fas fa-plus-circle"></i> E'lon berish</a>
+            <a href="{% url 'user:profile' %}"><i class="fas fa-user"></i> Profil</a>
+            <a href="{% url 'user:logout' %}"><i class="fas fa-sign-out-alt"></i> Chiqish</a>
+            {% else %}
+            <a href="{% url 'user:login' %}"><i class="fas fa-sign-in-alt"></i> Kirish</a>
+            <a href="{% url 'user:register' %}"><i class="fas fa-user-plus"></i> Ro'yxatdan o'tish</a>
+            {% endif %}
+            <button onclick="toggleTheme()" id="themeBtn"><i class="fas fa-moon"></i></button>
+        </div>
+    </div>
+
+    <!-- HERO - faqat rasm, gradient yo'q -->
+    <div class="hero">
+        <h1>O'zingizning orzu qilgan<br>avtomobilingizni toping</h1>
+        <p>Ishonchli platforma - 1000+ avtomobillar, eng yaxshi narxlar</p>
+        <div class="hero-buttons">
+            <a href="#" class="btn-primary">Avtomobillarni ko'rish</a>
+            {% if user.is_authenticated %}
+             <a href="{% url 'user:create_listing' %}" class="btn-outline">E'lon berish</a>
+            {% else %}
+            <a href="{% url 'user:login' %}" class="btn-outline">E'lon berish</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="search">
+        <input id="searchInput" placeholder="Brend, model yoki kategoriya bo'yicha qidirish...">
+        <button onclick="searchCars()"><i class="fas fa-search"></i> Qidirish</button>
+    </div>
+
+    <!-- CATEGORIES -->
+    <div class="categories">
+        <h2>Kategoriyalar</h2>
+        <div class="cat-grid">
+            <div class="cat" onclick="filterCars('all')"><i class="fas fa-car"></i> Barchasi</div>
+            <div class="cat" onclick="filterCars('sedan')"><i class="fas fa-car-side"></i> Sedan</div>
+            <div class="cat" onclick="filterCars('suv')"><i class="fas fa-truck"></i> SUV</div>
+            <div class="cat" onclick="filterCars('hatchback')"><i class="fas fa-caravan"></i> Xetchbek</div>
+
+            <div class="cat" onclick="filterCars('pickup')"><i class="fas fa-truck-pickup"></i> Pikap</div>
+        </div>
+    </div>
+
+    <!-- LISTINGS - Back-end ma'lumotlari, kelmasa o'zidan qo'shadi -->
+    <div class="section">
+        <h2>So'nggi qo'shilgan avtomobillar</h2>
+        <div class="section-subtitle">Eng yangi e'lonlar birinchi bo'lib siz uchun</div>
+        <div class="grid" id="carsGrid">
+            {% if listings %}
+                {% for listing in listings %}
+                <div class="card" data-category="{{ listing.category }}">
+                    {% if listing.main_image %}
+                    <img src="{{ listing.main_image }}" alt="{{ listing.brand }} {{ listing.model }}">
+                    {% else %}
+                    <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=600&q=80" alt="Car">
+                    {% endif %}
+                    <div class="card-body">
+                        <h3 class="car-title">{{ listing.brand }} {{ listing.model }}</h3>
+                        <p><i class="far fa-calendar-alt"></i> {{ listing.year }}</p>
+                        <div class="price">${{ listing.price }}</div>
+                        <a href="{% url 'user:listing_detail' listing.slug %}">Batafsil <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                Back-end ma'lumotlari kelmasa o'zidan qo'shiladi
+                <div class="card" data-category="sedan">
+                    <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=600&q=80" alt="Toyota Camry">
+                    <div class="card-body">
+                        <h3 class="car-title">Toyota Camry</h3>
+                        <p><i class="far fa-calendar-alt"></i> 2022</p>
+                        <div class="price">$25,000</div>
+                        <a href="#">Batafsil <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="card" data-category="sedan">
+                    <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=600&q=80" alt="Honda Civic">
+                    <div class="card-body">
+                        <h3 class="car-title">Honda Civic</h3>
+                        <p><i class="far fa-calendar-alt"></i> 2021</p>
+                        <div class="price">$20,500</div>
+                        <a href="#">Batafsil <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="card" data-category="suv">
+                    <img src="https://images.unsplash.com/photo-1556189250-72ba954cfc2b?auto=format&fit=crop&w=600&q=80" alt="BMW X5">
+                    <div class="card-body">
+                        <h3 class="car-title">BMW X5</h3>
+                        <p><i class="far fa-calendar-alt"></i> 2023</p>
+                        <div class="price">$55,000</div>
+                        <a href="#">Batafsil <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="card" data-category="suv">
+                    <img src="https://images.unsplash.com/photo-1533473359331-8405c2a09b1b?auto=format&fit=crop&w=600&q=80" alt="Mercedes GLE">
+                    <div class="card-body">
+                        <h3 class="car-title">Mercedes GLE</h3>
+                        <p><i class="far fa-calendar-alt"></i> 2023</p>
+                        <div class="price">$78,000</div>
+                        <a href="#">Batafsil <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="card" data-category="hatchback">
+                    <img src="https://images.unsplash.com/photo-1590362891991-f776e747a588?auto=format&fit=crop&w=600&q=80" alt="Volkswagen Golf">
+                    <div class="card-body">
+                        <h3 class="car-title">Volkswagen Golf</h3>
+                        <p><i class="far fa-calendar-alt"></i> 2022</p>
+                        <div class="price">$18,500</div>
+                        <a href="#">Batafsil <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="card" data-category="coupe">
+                    <img src="https://images.unsplash.com/photo-1580274455191-1c62238fa333?auto=format&fit=crop&w=600&q=80" alt="Audi A5">
+                    <div class="card-body">
+                        <h3 class="car-title">Audi A5</h3>
+                        <p><i class="far fa-calendar-alt"></i> 2022</p>
+                        <div class="price">$45,000</div>
+                        <a href="#">Batafsil <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- WHY CHOOSE US -->
+    <div class="section why-section">
+        <h2>Nega aynan AutoHub?</h2>
+        <div class="section-subtitle">Biz sizga eng yaxshi xizmatni taqdim etamiz</div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                <h3>Ishonchli platforma</h3>
+                <p>Xavfsiz va ishonchli avtomobil savdo platformasi</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                <h3>Keng tanlov</h3>
+                <p>Yuzlab avtomobillar, turli kategoriyalar va narx oralig'ida</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-handshake"></i></div>
+                <h3>Oson bitimlar</h3>
+                <p>Tez va qulay savdo jarayoni</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- TESTIMONIALS -->
+    <div class="section testimonial-section">
+        <h2>Foydalanuvchilar fikri</h2>
+        <div class="section-subtitle">Mijozlarimiz biz haqimizda</div>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <p>"AutoHub orqali avtomobilimni juda tez va oson sotdim. Juda qulay platforma!"</p>
+                <h4>- Jahongir A.</h4>
+            </div>
+            <div class="testimonial-card">
+                <p>"Orzu qilgan mashinamni bir hafta ichida topdim. Juda katta tanlov va yaxshi narxlar!"</p>
+                <h4>- Madina K.</h4>
+            </div>
+            <div class="testimonial-card">
+                <p>"Xavfsiz va ishonchli. AutoHub orqali savdo qilish juda yoqadi."</p>
+                <h4>- Azizbek R.</h4>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <div class="footer-container">
+            <div>
+                <h3><i class="fas fa-car"></i> AutoHub</h3>
+                <p>Ishonchli avtomobil bozori - orzuingizdagi mashinani toping</p>
+            </div>
+            <div>
+                <h4>Navigation</h4>
+                <a href="{% url 'index' %}"><i class="fas fa-chevron-right"></i> Bosh sahifa</a>
+                <a href="#"><i class="fas fa-chevron-right"></i> Avtomobillar</a>
+                <a href="#"><i class="fas fa-chevron-right"></i> Kategoriyalar</a>
+                <a href="#"><i class="fas fa-chevron-right"></i> Biz haqimizda</a>
+            </div>
+            <div>
+                <h4>Account</h4>
+                <a href="{% url 'user:login' %}"><i class="fas fa-chevron-right"></i> Kirish</a>
+                <a href="{% url 'user:register' %}"><i class="fas fa-chevron-right"></i> Ro'yxatdan o'tish</a>
+                <a href="{% url 'user:profile' %}"><i class="fas fa-chevron-right"></i> Mening e'lonlarim</a>
+            </div>
+            <div>
+                <h4>Contact</h4>
+                <p><i class="fas fa-envelope"></i> autohub@gmail.com</p>
+                <p><i class="fas fa-phone"></i> +998 90 123 45 67</p>
+                
+                <p><i class="fab fa-telegram"></i> @autohuboffical</p>
+            </div>
+        </div>
+        <div class="footer-bottom">© 2026 AutoHub | Barcha huquqlar himoyalangan</div>
+    </div>
+
+    <script>
+        /* SEARCH */
+        function searchCars() {
+            let input = document.getElementById("searchInput").value.toLowerCase();
+            document.querySelectorAll(".card").forEach(card => {
+                let title = card.querySelector(".car-title")?.innerText.toLowerCase();
+                if (title) {
+                    card.style.display = title.includes(input) ? "block" : "none";
+                }
+            });
+        }
+
+        /* FILTER */
+        function filterCars(category) {
+            document.querySelectorAll(".card").forEach(card => {
+                if (category === "all") {
+                    card.style.display = "block";
+                } else {
+                    let cardCategory = card.dataset.category;
+                    card.style.display = cardCategory === category ? "block" : "none";
+                }
+            });
+        }
+
+        /* DARK MODE */
+        function toggleTheme() {
+            document.body.classList.toggle("dark");
+            let btn = document.getElementById("themeBtn");
+            if (document.body.classList.contains("dark")) {
+                btn.innerHTML = '<i class="fas fa-sun"></i>';
+                localStorage.setItem("theme", "dark");
+            } else {
+                btn.innerHTML = '<i class="fas fa-moon"></i>';
+                localStorage.setItem("theme", "light");
+            }
+        }
+
+        window.onload = () => {
+            if (localStorage.getItem("theme") === "dark") {
+                document.body.classList.add("dark");
+                document.getElementById("themeBtn").innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        }
+    </script>
+</body>
+
+</html>

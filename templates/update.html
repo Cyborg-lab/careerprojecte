@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E'lonni tahrirlash | AutoHub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8f0e8 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Container */
+        .container {
+            max-width: 550px;
+            width: 100%;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Header - to'q yashil */
+        .form-header {
+            background: linear-gradient(135deg, #0a5c4c 0%, #0a5c4c 100%);
+            padding: 32px 32px 28px;
+            text-align: center;
+            color: white;
+        }
+
+        .form-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .form-header h1 i {
+            font-size: 28px;
+        }
+
+        .form-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Form Body - oq */
+        .form-body {
+            padding: 32px;
+            background: white;
+        }
+
+        /* Form Groups */
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #2d4a3e;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-group label i {
+            color: #0a5c4c;
+            font-size: 16px;
+            width: 20px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e8e0;
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s;
+            background: white;
+            color: #1f2e26;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #0a5c4c;
+            box-shadow: 0 0 0 3px rgba(10, 92, 76, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Help Text */
+        .help-text {
+            font-size: 12px;
+            color: #7a8b7f;
+            margin-top: 6px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .help-text i {
+            font-size: 11px;
+            color: #0a5c4c;
+        }
+
+        /* Character Counter */
+        .char-counter {
+            text-align: right;
+            font-size: 12px;
+            color: #7a8b7f;
+            margin-top: 5px;
+        }
+
+        /* Button Group */
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        /* Button - to'q yashil (Update) */
+        .btn-update {
+            flex: 2;
+            background: linear-gradient(135deg, #0a5c4c 0%, #0a5c4c 100%);
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-update:hover {
+            background: linear-gradient(135deg, #0f6e5a 0%, #0f6e5a 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(10, 92, 76, 0.3);
+        }
+
+        .btn-update:active {
+            transform: translateY(0);
+        }
+
+        /* Back Button - ochiq yashil */
+        .btn-back {
+            flex: 1;
+            background: #e8f0e8;
+            color: #0a5c4c;
+            border: 2px solid #0a5c4c;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-back:hover {
+            background: #0a5c4c;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(10, 92, 76, 0.2);
+        }
+
+        .btn-back:active {
+            transform: translateY(0);
+        }
+
+        /* Back Link (alternative) */
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e8f0e8;
+        }
+
+        .back-link a {
+            color: #7a8b7f;
+            text-decoration: none;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+        }
+
+        .back-link a:hover {
+            color: #0a5c4c;
+            transform: translateX(-3px);
+        }
+
+        /* Required Field */
+        .required:after {
+            content: "*";
+            color: #dc2626;
+            margin-left: 4px;
+        }
+
+        /* Alert Messages */
+        .alert {
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            animation: slideDown 0.3s ease;
+        }
+
+        .alert-success {
+            background: #e8f5e9;
+            color: #0a5c4c;
+            border-left: 4px solid #0a5c4c;
+        }
+
+        .alert-error {
+            background: #fee2e2;
+            color: #991b1b;
+            border-left: 4px solid #ef4444;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .form-header {
+                padding: 24px 20px;
+            }
+            
+            .form-header h1 {
+                font-size: 24px;
+            }
+            
+            .form-body {
+                padding: 24px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn-update, .btn-back {
+                width: 100%;
+            }
+        }
+
+        /* Placeholder style */
+        ::placeholder {
+            color: #b8c4bc;
+            opacity: 1;
+        }
+
+        /* Input number spinner */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-header">
+            <h1>
+                <i class="fas fa-edit"></i>
+                Edit Listing
+            </h1>
+            <p>Avtomobil ma'lumotlarini yangilang</p>
+        </div>
+    
+        <div class="form-body">
+            <!-- Django messages -->
+            {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    <i class="fas {% if message.tags == 'success' %}fa-check-circle{% else %}fa-exclamation-circle{% endif %}"></i>
+                    {{ message }}
+                </div>
+                {% endfor %}
+            {% endif %}
+            
+            <form method="post">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label class="required">
+                        <i class="fas fa-align-left"></i> Tavsif
+                    </label>
+                    <textarea name="description" placeholder="Avtomobil haqida batafsil ma'lumot..." id="description">{{ listing.description.value }}</textarea>
+                    <div class="char-counter">
+                        <span id="charCount">0</span> / 500 belgi
+                    </div>
+                    <div class="help-text">
+                        <i class="fas fa-info-circle"></i> Avtomobilning holati, texnik xususiyatlari haqida yozing
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required">
+                        <i class="fas fa-phone-alt"></i> Telefon raqam
+                    </label>
+                    <input type="tel" name="phone" value="{{ listing.phone.value }}" placeholder="+998 90 123 45 67">
+                    <div class="help-text">
+                        <i class="fas fa-shield-alt"></i> Xaridorlar siz bilan bog'lanishi uchun
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>
+                        <i class="fas fa-envelope"></i> Email
+                    </label>
+                    <input type="email" name="email" value="{{ listing.email.value }}" placeholder="your@email.com">
+                    <div class="help-text">
+                        <i class="fas fa-envelope"></i> Ixtiyoriy, qo'shimcha bog'lanish uchun
+                    </div>
+                </div>
+                
+                <!-- Button Group with Back Button -->
+                <div class="button-group">
+                    <button type="submit" class="btn-update">
+                        <i class="fas fa-save"></i> Update Listing
+                    </button>
+                    
+                    <button type="button" class="btn-back" onclick="goBack()">
+                        <i class="fas fa-arrow-left"></i> Orqaga
+                    </button>
+                </div>
+                
+                <div class="back-link">
+                    <a href="/">
+                        <i class="fas fa-home"></i> Bosh sahifaga qaytish
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Go back function
+        function goBack() {
+            if (document.referrer && document.referrer !== "") {
+                window.history.back();
+            } else {
+                window.location.href = "/";
+            }
+        }
+
+        // Character counter for description
+        const descriptionField = document.getElementById('description');
+        const charCountSpan = document.getElementById('charCount');
+        const MAX_CHARS = 500;
+        
+        function updateCharCount() {
+            if (descriptionField && charCountSpan) {
+                let count = descriptionField.value.length;
+                
+                if (count > MAX_CHARS) {
+                    descriptionField.value = descriptionField.value.substring(0, MAX_CHARS);
+                    count = MAX_CHARS;
+                }
+                
+                charCountSpan.textContent = count;
+                
+                if (count > MAX_CHARS - 50) {
+                    charCountSpan.style.color = '#e67e22';
+                } else {
+                    charCountSpan.style.color = '#7a8b7f';
+                }
+                
+                if (count === MAX_CHARS) {
+                    charCountSpan.style.color = '#dc2626';
+                }
+            }
+        }
+        
+        if (descriptionField) {
+            descriptionField.addEventListener('input', updateCharCount);
+            updateCharCount();
+        }
+        
+        // Form validation
+        document.querySelector('form')?.addEventListener('submit', function(e) {
+            const description = document.querySelector('[name="description"]')?.value.trim();
+            const phone = document.querySelector('[name="phone"]')?.value.trim();
+            
+            if (!description) {
+                e.preventDefault();
+                alert("Iltimos, tavsifni to'ldiring!");
+                descriptionField?.focus();
+                return false;
+            }
+            
+            if (description.length < 10) {
+                e.preventDefault();
+                alert("Tavsif kamida 10 belgidan iborat bo'lishi kerak!");
+                descriptionField?.focus();
+                return false;
+            }
+            
+            if (!phone) {
+                e.preventDefault();
+                alert("Iltimos, telefon raqamni kiriting!");
+                document.querySelector('[name="phone"]')?.focus();
+                return false;
+            }
+            
+            // Basic phone validation
+            const phoneRegex = /^[\+\d\s\-\(\)]{9,20}$/;
+            if (!phoneRegex.test(phone)) {
+                e.preventDefault();
+                alert("Iltimos, to'g'ri telefon raqam kiriting!\nMasalan: +998 90 123 45 67");
+                return false;
+            }
+            
+            return true;
+        });
+        
+        // Auto format phone number for Uzbekistan
+        const phoneInput = document.querySelector('[name="phone"]');
+        if (phoneInput) {
+            phoneInput.addEventListener('input', function(e) {
+                let value = this.value.replace(/\D/g, '');
+                if (value.startsWith('998') && value.length > 3) {
+                    if (value.length <= 5) {
+                        this.value = '+' + value;
+                    } else if (value.length <= 8) {
+                        this.value = '+' + value.slice(0, 3) + ' ' + value.slice(3);
+                    } else if (value.length <= 10) {
+                        this.value = '+' + value.slice(0, 3) + ' ' + value.slice(3, 5) + ' ' + value.slice(5);
+                    } else {
+                        this.value = '+' + value.slice(0, 3) + ' ' + value.slice(3, 5) + ' ' + value.slice(5, 8) + ' ' + value.slice(8, 12);
+                    }
+                } else if (value.length > 0 && !value.startsWith('998')) {
+                    // If doesn't start with 998, just format with spaces
+                    if (value.length <= 2) {
+                        this.value = value;
+                    } else if (value.length <= 5) {
+                        this.value = value.slice(0, 2) + ' ' + value.slice(2);
+                    } else if (value.length <= 8) {
+                        this.value = value.slice(0, 2) + ' ' + value.slice(2, 5) + ' ' + value.slice(5);
+                    } else {
+                        this.value = value.slice(0, 2) + ' ' + value.slice(2, 5) + ' ' + value.slice(5, 8) + ' ' + value.slice(8, 12);
+                    }
+                }
+            });
+        }
+
+        // Keyboard shortcut for back button (Escape key)
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                goBack();
+            }
+        });
+    </script>
+</body>
+</html>

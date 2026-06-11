@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profil | AutoHub</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #ffffff;
+    color: #111827;
+    line-height: 1.6;
+}
+
+/* DARK MODE */
+body.dark {
+    background: #0f172a;
+    color: #f3f4f6;
+}
+
+body.dark .profile {
+    background: #1e293b;
+    box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+}
+
+body.dark .card {
+    background: #1e293b;
+}
+
+body.dark .card-body h4 {
+    color: #f3f4f6;
+}
+
+body.dark .card-body p {
+    color: #9ca3af;
+}
+
+body.dark .section h3 {
+    color: #f3f4f6;
+}
+
+/* HEADER */
+.header {
+    background: #033A39;
+    padding: 16px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.logo i {
+    font-size: 28px;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 12px;
+    transition: all 0.3s;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.nav a:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+#themeBtn {
+    margin-left: 8px;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 18px;
+    transition: all 0.3s;
+}
+
+#themeBtn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+/* BACK BUTTON */
+.back {
+    padding: 24px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.back a {
+    text-decoration: none;
+    color: #033A39;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 40px;
+    background: rgba(3, 58, 57, 0.1);
+}
+
+.back a:hover {
+    background: #033A39;
+    color: white;
+    transform: translateX(-5px);
+}
+
+/* PROFILE CARD */
+.profile {
+    text-align: center;
+    margin: 20px auto 40px;
+    background: white;
+    max-width: 500px;
+    padding: 48px 32px;
+    border-radius: 32px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid #f0f0f0;
+}
+
+.profile:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
+}
+
+.profile-img-wrapper {
+    position: relative;
+    width: 130px;
+    height: 130px;
+    margin: 0 auto 20px;
+}
+
+.profile img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #033A39;
+    transition: transform 0.3s;
+}
+
+.profile img:hover {
+    transform: scale(1.05);
+}
+
+.profile h2 {
+    font-size: 28px;
+    margin-bottom: 8px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.profile p {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 16px;
+}
+
+.info {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(3, 58, 57, 0.1);
+    padding: 8px 20px;
+    border-radius: 40px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #033A39;
+}
+
+.info i {
+    font-size: 16px;
+}
+
+/* SECTION HEADINGS */
+.section {
+    width: 90%;
+    max-width: 1200px;
+    margin: 50px auto;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.section h3 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #111827;
+    letter-spacing: -0.5px;
+}
+
+.section h3 i {
+    color: #033A39;
+    margin-right: 12px;
+}
+
+.create-btn {
+    background: #033A39;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.create-btn:hover {
+    background: #044c4b;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(3, 58, 57, 0.3);
+}
+
+/* GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+/* CARD */
+.card {
+    background: white;
+    border-radius: 24px;
+    overflow: hidden;
+    transition: all 0.4s;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f0f0f0;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.4s;
+}
+
+.card:hover img {
+    transform: scale(1.05);
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-body h4 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #111827;
+}
+
+.card-body p {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 4px;
+}
+
+.card-body p i {
+    width: 20px;
+    color: #033A39;
+}
+
+.price {
+    font-size: 20px;
+    font-weight: 800;
+    color: #033A39;
+    margin: 12px 0;
+}
+
+/* BUTTON */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 40px;
+    text-decoration: none;
+    background: #033A39;
+    color: white;
+    transition: all 0.3s;
+}
+
+.btn:hover {
+    background: #044c4b;
+    transform: translateY(-2px);
+    gap: 12px;
+}
+
+.btn-edit {
+    background: #f59e0b;
+}
+
+.btn-edit:hover {
+    background: #d97706;
+}
+
+.btn-delete {
+    background: #ef4444;
+}
+
+.btn-delete:hover {
+    background: #dc2626;
+}
+
+.card-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.card-actions .btn {
+    flex: 1;
+    justify-content: center;
+    margin-top: 0;
+    padding: 8px 12px;
+    font-size: 13px;
+}
+
+/* EMPTY STATE */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: #f9fafb;
+    border-radius: 32px;
+    grid-column: 1/-1;
+}
+
+.empty-state i {
+    font-size: 64px;
+    color: #033A39;
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+.empty-state p {
+    font-size: 16px;
+    color: #6b7280;
+    margin-bottom: 20px;
+}
+
+.empty-state .create-btn {
+    display: inline-flex;
+}
+
+/* FOOTER */
+.footer {
+    background: #033A39;
+    color: white;
+    margin-top: 60px;
+    padding: 40px 5% 20px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+}
+
+.footer h4 {
+    margin-bottom: 16px;
+    font-weight: 700;
+}
+
+.footer p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+}
+
+.footer a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    display: block;
+    margin: 8px 0;
+    transition: all 0.3s;
+}
+
+.footer a:hover {
+    color: white;
+    transform: translateX(5px);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 30px;
+    margin-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 20px;
+    }
+    
+    .nav {
+        justify-content: center;
+    }
+    
+    .profile {
+        margin: 20px 20px 40px;
+        padding: 32px 24px;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .section h3 {
+        font-size: 24px;
+    }
+    
+    .grid {
+        gap: 20px;
+    }
+    
+    .card-actions {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile h2 {
+        font-size: 24px;
+    }
+    
+    .section {
+        width: 95%;
+    }
+    
+    .card-body h4 {
+        font-size: 16px;
+    }
+    
+    .price {
+        font-size: 18px;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <div class="logo">
+        <i class="fas fa-car"></i>
+        <span>AutoHub</span>
+    </div>
+    <div class="nav">
+        <a href="/"><i class="fas fa-home"></i> Bosh sahifa</a>
+        <a href="{% url 'user:create_listing' %}"><i class="fas fa-plus-circle"></i> E'lon berish</a>
+        <a href="{% url 'user:profile' %}"><i class="fas fa-user"></i> Profil</a>
+        <a href="{% url 'user:logout' %}"><i class="fas fa-sign-out-alt"></i> Chiqish</a>
+        <button onclick="toggleTheme()" id="themeBtn"><i class="fas fa-moon"></i></button>
+    </div>
+</div>
+
+<!-- BACK BUTTON -->
+<div class="back">
+    <a href="/"><i class="fas fa-arrow-left"></i> Orqaga</a>
+</div>
+
+<!-- PROFILE -->
+<div class="profile">
+    <div class="profile-img-wrapper">
+        <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Profile Picture">
+    </div>
+    <h2>{{ user.username }}</h2>
+    <p><i class="fas fa-envelope"></i> {{ user.email }}</p>
+    <div class="info">
+        <i class="fas fa-car"></i>
+        Jami e'lonlar: {{ listings.count }}
+    </div>
+</div>
+
+<!-- USER LISTINGS -->
+<div class="section">
+    <div class="section-header">
+        <h3><i class="fas fa-list"></i> Mening e'lonlarim</h3>
+        <a href="{% url 'user:create_listing' %}" class="create-btn">
+            <i class="fas fa-plus"></i> Yangi e'lon qo'shish
+        </a>
+    </div>
+    <div class="grid">
+        {% for listing in listings %}
+        <div class="card">
+            {% if listing.main_image %}
+            <img src="{{ listing.main_image }}" alt="{{ listing.brand }} {{ listing.model }}">
+            {% else %}
+            <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=600&q=80" alt="Car">
+            {% endif %}
+            <div class="card-body">
+                <h4>{{ listing.brand }} {{ listing.model }}</h4>
+                <p><i class="far fa-calendar-alt"></i> {{ listing.year }}</p>
+                <div class="price">${{ listing.price }}</div>
+                <div class="card-actions">
+                    <a class="btn" href="{% url 'user:listing_detail' listing.slug %}">
+                        <i class="fas fa-eye"></i> Ko'rish
+                    </a>
+                    <a class="btn btn-edit" href="{% url 'user:update_listing' listing.slug %}">
+                        <i class="fas fa-edit"></i> Tahrirlash
+                    </a>
+         
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="empty-state">
+            <i class="fas fa-car-side"></i>
+            <p>Siz hali hech qanday e'lon joylashtirmagansiz</p>
+            <a href="{% url 'user:create_listing' %}" class="create-btn">
+                <i class="fas fa-plus"></i> Birinchi e'lonni joylashtiring
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    <div class="footer-container">
+        <div>
+            <h4><i class="fas fa-car"></i> AutoHub</h4>
+            <p>Ishonchli avtomobil bozori</p>
+        </div>
+        <div>
+            <h4>Navigatsiya</h4>
+            <a href="/"><i class="fas fa-chevron-right"></i> Bosh sahifa</a>
+            <a href="#"><i class="fas fa-chevron-right"></i> Avtomobillar</a>
+            <a href="#"><i class="fas fa-chevron-right"></i> Kategoriyalar</a>
+        </div>
+        <div>
+            <h4>Akkaunt</h4>
+            <a href="{% url 'user:profile' %}"><i class="fas fa-chevron-right"></i> Profil</a>
+            <a href="{% url 'user:create_listing' %}"><i class="fas fa-chevron-right"></i> E'lon berish</a>
+        </div>
+        <div>
+            <h4>Bog'lanish</h4>
+            <p><i class="fas fa-envelope"></i> autohub@gmail.com</p>
+            <p><i class="fas fa-phone"></i> +998 90 123 45 67</p>
+        </div>
+    </div>
+    <div class="footer-bottom">© 2026 AutoHub | Barcha huquqlar himoyalangan</div>
+</div>
+
+<script>
+    /* DARK MODE */
+    function toggleTheme() {
+        document.body.classList.toggle("dark");
+        let btn = document.getElementById("themeBtn");
+        if (document.body.classList.contains("dark")) {
+            btn.innerHTML = '<i class="fas fa-sun"></i>';
+            localStorage.setItem("theme", "dark");
+        } else {
+            btn.innerHTML = '<i class="fas fa-moon"></i>';
+            localStorage.setItem("theme", "light");
+        }
+    }
+
+    window.onload = () => {
+        if (localStorage.getItem("theme") === "dark") {
+            document.body.classList.add("dark");
+            document.getElementById("themeBtn").innerHTML = '<i class="fas fa-sun"></i>';
+        }
+    }
+</script>
+
+</body>
+</html>
